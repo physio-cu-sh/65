@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical PTCU</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(135deg,#071a2b,#0b3550,#0a6170);
+  padding:20px;color:#fff;
+}
+.card{
+  width:min(430px,100%);padding:38px 30px;border-radius:24px;
+  background:rgba(255,255,255,.11);backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:0 25px 60px rgba(0,0,0,.35);text-align:center;
+}
+.logo{
+  width:76px;height:76px;margin:0 auto 18px;border-radius:22px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#18c8b0,#1779d1);
+  font-size:27px;font-weight:800;box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+h1{font-size:30px;margin-bottom:8px}
+.subtitle{color:#c9dce7;font-size:14px;margin-bottom:28px}
+label{display:block;text-align:left;font-size:13px;color:#d9e8ef;margin:0 0 8px 3px}
+input{
+  width:100%;padding:15px 16px;border:1px solid rgba(255,255,255,.22);
+  border-radius:13px;background:rgba(0,0,0,.18);color:#fff;
+  outline:none;font-size:16px;letter-spacing:.5px;
+}
+input:focus{border-color:#35d7c2;box-shadow:0 0 0 3px rgba(53,215,194,.13)}
+button{
+  width:100%;margin-top:15px;padding:15px;border:0;border-radius:13px;
+  background:linear-gradient(135deg,#20c9ad,#197bd3);color:white;
+  font-size:16px;font-weight:700;cursor:pointer;transition:.2s;
+}
+button:hover{transform:translateY(-1px);filter:brightness(1.07)}
+button:active{transform:translateY(0)}
+#message{min-height:22px;margin-top:15px;font-size:13px}
+.error{color:#ffb5b5}.success{color:#aef5dc}
+.footer{margin-top:25px;color:#9fb8c5;font-size:11px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">PT</div>
+  <h1>Practical PTCU</h1>
+  <p class="subtitle">Enter your access code to continue</p>
+
+  <form id="accessForm">
+    <label for="code">Password</label>
+    <input id="code" type="password" inputmode="text" autocomplete="off"
+           placeholder="Enter your password" required>
+    <button type="submit">Access Practical</button>
+  </form>
+
+  <div id="message"></div>
+  <div class="footer">PTCU • Practical Access Portal</div>
+</div>
+
+<script>
+const ACCESS_CODES = new Set(["PTCU65_2ND"]);
+
+const TELEGRAM_LINK = "https://t.me/+D7rv_BTcUQE1ODRk";
+
+document.getElementById("accessForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const code = document.getElementById("code").value.trim();
+  const msg = document.getElementById("message");
+
+  if (ACCESS_CODES.has(code)) {
+    msg.className = "success";
+    msg.textContent = "Access granted. Redirecting...";
+    setTimeout(() => { window.location.href = TELEGRAM_LINK; }, 350);
+  } else {
+    msg.className = "error";
+    msg.textContent = "Incorrect password. Please try again.";
+  }
+});
+</script>
+</body>
+</html>
